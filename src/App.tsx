@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import './App.scss';
+import {TextField, Autocomplete} from "@mui/material";
+import {StopInformation} from "./types/StopInfo";
+import {getStopAreas} from "./http/busAPI";
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import Bus from "./components/Bus";
 
+const queryClient = new QueryClient();
 function App() {
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="App">
+            <Bus/>
+
+        </div>
+      </QueryClientProvider>
   );
 }
 

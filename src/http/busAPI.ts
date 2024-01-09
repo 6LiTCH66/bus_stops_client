@@ -54,7 +54,7 @@ export const getUserLocation = async (params: LocationState) => {
 
 export const getBusTimeByStop = async (params: BusTimeDTO) => {
     try{
-        const routes = await axios.post<TripTimeInformation[]>(`http://localhost:3000/buss/location/bus-time`, params, {withCredentials: true});
+        const routes = await axios.post<TripTimeInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss/location/bus-time`, params, {withCredentials: true});
         return routes.data
 
     }catch (err){

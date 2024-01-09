@@ -23,29 +23,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
-import "./bus.scss"
-import {BusInfoDTO} from "../types/BusInfoDTO";
 import {RouteInformation} from "../types/RouteInformation";
-import {TripTimeInformation} from "../types/TripTimeInformation";
+import IconButton from '@mui/material/IconButton';
+import Fingerprint from '@mui/icons-material/Fingerprint';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PlaceIcon from '@mui/icons-material/Place';
+import ExploreIcon from '@mui/icons-material/Explore';
+import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
+import "./bus.scss"
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 const Bus = () => {
     const [selectedArea, setSelectedArea] = useState<StopInformation | null>(null)
     const [selectedStop, setSelectedStop] = useState<StopInformation[] | null>(null)
@@ -128,36 +114,48 @@ const Bus = () => {
 
     return (
         <div className="main-bus">
-            <Button variant="contained" color="success" onClick={() => detectLocation()}>Automatically detect
-                location</Button>
-            {stopAreas && (
-                <Autocomplete
-                    id="auto-complete"
-                    options={stopAreas}
-                    getOptionLabel={(option: StopInformation) => option.stop_area}
-                    sx={{width: 300}}
-                    onChange={(event, newValue) => setSelectedArea(newValue)}
-                    value={selectedArea}
-                    isOptionEqualToValue={(option, value) => option.stop_area === value.stop_area}
-                    autoComplete
-                    includeInputInList
-                    renderInput={(params) => <TextField {...params} variant="standard" label="Enter your Stop Area"/>}
-                />
-            )}
 
-            <Autocomplete
-                id="disabled"
-                options={selectedStop || []}
-                getOptionLabel={(option: StopInformation) => `${option.stop_name} ${option.stop_code}`}
-                sx={{width: 300}}
-                disabled={!selectedStop ? true : false}
-                value={selectedBusStop}
-                onChange={(event, newValue) => setSelectedBusStop(newValue)}
-                isOptionEqualToValue={(option, value) => option.id === value.id}
-                renderInput={(params) => (
-                    <TextField {...params} label="Enter your Bus Stop" variant="standard"/>
+
+            {/*<Button variant="outlined" onClick={() => detectLocation()} style={{textTransform: 'none', fontSize: '16px'}}>*/}
+            {/*    <LocationOnTwoToneIcon/>*/}
+
+            {/*    My location*/}
+            {/*</Button>*/}
+            <div className="main-btns">
+                {stopAreas && (
+                    <Autocomplete
+                        id="auto-complete"
+                        options={stopAreas}
+                        getOptionLabel={(option: StopInformation) => option.stop_area}
+                        sx={{width: 300}}
+                        onChange={(event, newValue) => setSelectedArea(newValue)}
+                        value={selectedArea}
+                        isOptionEqualToValue={(option, value) => option.stop_area === value.stop_area}
+                        autoComplete
+                        includeInputInList
+                        renderInput={(params) => <TextField {...params} variant="standard" label="Enter your Stop Area"/>}
+                    />
                 )}
-            />
+
+                <Autocomplete
+                    id="disabled"
+                    options={selectedStop || []}
+                    getOptionLabel={(option: StopInformation) => `${option.stop_name} ${option.stop_code}`}
+                    sx={{width: 300}}
+                    disabled={!selectedStop ? true : false}
+                    value={selectedBusStop}
+                    onChange={(event, newValue) => setSelectedBusStop(newValue)}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Enter your Bus Stop" variant="standard"/>
+                    )}
+                />
+
+                <IconButton aria-label="locationon"  onClick={() => detectLocation()} >
+                    <PlaceIcon fontSize="large"/>
+                </IconButton>
+            </div>
+
 
             <div>
                 {selectedBusStop && (

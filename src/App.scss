@@ -7,10 +7,8 @@
 html, body, .App, #root {
   height: 100%
 }
-//.App {
-//  display: flex;
-//  justify-content: center;
-//  align-content: center;
-//  height: 100%;
-//
-//}
+.App {
+  background-image: url('../public/50341-Bus-Stops.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}

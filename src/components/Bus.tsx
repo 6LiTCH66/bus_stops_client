@@ -76,6 +76,7 @@ const Bus = () => {
     }, [selectedBusStop]);
 
     const detectLocation = () => {
+
         navigator.geolocation.getCurrentPosition((position) => {
 
             getClosestStop({user_lat: position.coords.latitude, user_lon:position.coords.longitude})
@@ -103,10 +104,12 @@ const Bus = () => {
     };
 
     const getBusTime = (bus: RouteInformation) => {
+        const currentTime = new Date().toLocaleTimeString()
+
         if (selectedBusStop){
             console.log(bus.route_short_name);
             console.log(selectedBusStop.stop_id);
-            getBusTimes({stop_id: selectedBusStop.stop_id, route_short_name: bus.route_short_name})
+            getBusTimes({stop_id: selectedBusStop.stop_id, route_short_name: bus.route_short_name, currentTime: currentTime})
         }
 
     };

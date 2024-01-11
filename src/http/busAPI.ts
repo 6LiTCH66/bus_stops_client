@@ -20,7 +20,7 @@ export const getStopAreas = async () =>{
 
 export const getStopByArea = async (params: StopAreaDTO) => {
     try{
-        const stopAreas = await axios.post<StopInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss`, params, {withCredentials: true});
+        const stopAreas = await axios.get<StopInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss`, {withCredentials: true, params: params});
         return stopAreas.data
 
     }catch (err){
@@ -32,7 +32,7 @@ export const getStopByArea = async (params: StopAreaDTO) => {
 
 export const getBusByStop = async (params: BusInfoDTO) => {
     try{
-        const routes = await axios.post<RouteInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss/all`, params, {withCredentials: true});
+        const routes = await axios.get<RouteInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss/all`, {withCredentials: true, params: params});
         return routes.data
 
     }catch (err){
@@ -43,7 +43,7 @@ export const getBusByStop = async (params: BusInfoDTO) => {
 
 export const getUserLocation = async (params: LocationState) => {
     try{
-        const routes = await axios.post<StopInformation>(`${process.env.REACT_APP_BASE_URL}/buss/location`, params, {withCredentials: true});
+        const routes = await axios.get<StopInformation>(`${process.env.REACT_APP_BASE_URL}/buss/location`, {withCredentials: true, params: params});
         return routes.data
 
     }catch (err){
@@ -54,7 +54,7 @@ export const getUserLocation = async (params: LocationState) => {
 
 export const getBusTimeByStop = async (params: BusTimeDTO) => {
     try{
-        const routes = await axios.post<TripTimeInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss/location/bus-time`, params, {withCredentials: true});
+        const routes = await axios.get<TripTimeInformation[]>(`${process.env.REACT_APP_BASE_URL}/buss/location/bus-time`,{withCredentials: true, params: params});
         return routes.data
 
     }catch (err){
